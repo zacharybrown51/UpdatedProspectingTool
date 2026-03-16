@@ -38,7 +38,7 @@ body{font-family:'Jost',sans-serif;background:var(--bg);color:var(--tx);min-heig
 .card{background:var(--bg2);border:1px solid var(--brd);border-radius:6px;overflow:hidden}
 .card-h{padding:11px 16px;border-bottom:1px solid var(--brd);font-family:'Jost',sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--tx3);display:flex;justify-content:space-between;align-items:center;font-weight:600}
 .card-h .badge{background:var(--bg4);padding:2px 8px;border-radius:3px;font-size:9px;color:var(--tx2)}
-.card-b{padding:14px 16px}
+.card-b{padding:14px 16px}.card-scroll .card-b{max-height:400px;overflow-y:auto}
 .bar-row{display:flex;align-items:center;gap:8px;margin-bottom:7px;font-family:'IBM Plex Mono',monospace;font-size:11px}
 .bar-lbl{width:120px;text-align:right;color:var(--tx2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex-shrink:0;font-family:'Jost',sans-serif;font-size:12px}
 .bar-trk{flex:1;height:18px;background:var(--bg);border-radius:3px;overflow:hidden}
@@ -163,7 +163,7 @@ h+='<div class="card"><div class="card-h">Opportunity Signals<span class="badge"
 var sigKeys=['NSH','HGR','DEC','HBL','PSH'];var sigMax=Math.max.apply(null,sigKeys.map(function(k){return sigCt[k]}));
 for(var i=0;i<sigKeys.length;i++){var k=sigKeys[i];h+='<div class="bar-row"><div class="bar-lbl" style="color:'+SIGC[k][1]+'">'+SIG[k]+'</div><div class="bar-trk"><div class="bar-fill" style="width:'+sigCt[k]/sigMax*100+'%;background:'+SIGC[k][1]+'">'+sigCt[k]+'</div></div><div class="bar-val">'+sigCt[k]+'</div></div>'}
 h+='<div style="margin-top:8px;font-size:9px;color:var(--tx3)">NSH: 401(k) without Safe Harbor (pitch SH conversion) &middot; DEC: Assets declining &gt;10% (pain point) &middot; HGR: Growth &gt;30% (expanding needs) &middot; HBL: Avg balance &gt;$150K (fee opportunity) &middot; PSH: Losing participants</div></div></div>';
-h+='<div class="card"><div class="card-h">Top Service Providers<span class="badge">'+TP.length+'</span></div><div class="card-b">';for(var i=0;i<TP.length;i++){h+='<div class="prov-row"><div class="prov-rank">'+(i+1)+'</div><div class="prov-name">'+H(TP[i][0])+'</div><div class="prov-ct">'+TP[i][1]+'</div><div class="prov-comp">'+FM.usd(TP[i][2])+'</div></div>'}h+='</div></div>';
+h+='<div class="card card-scroll"><div class="card-h">Top Service Providers<span class="badge">'+TP.length+'</span></div><div class="card-b">';for(var i=0;i<TP.length;i++){h+='<div class="prov-row"><div class="prov-rank">'+(i+1)+'</div><div class="prov-name">'+H(TP[i][0])+'</div><div class="prov-ct">'+TP[i][1]+'</div><div class="prov-comp">'+FM.usd(TP[i][2])+'</div></div>'}h+='</div></div>';
 h+='<div class="card"><div class="card-h">Top Markets by AUM<span class="badge">'+tc.length+'</span></div><div class="card-b">';for(var i=0;i<tc.length;i++){var cn=tc[i][0].split(' ').map(function(w){return w[0]+w.slice(1).toLowerCase()}).join(' ');h+='<div class="bar-row"><div class="bar-lbl">'+H(cn)+'</div><div class="bar-trk"><div class="bar-fill" style="width:'+(tc[i][1][1]/mx*100)+'%;background:var(--acc)">'+tc[i][1][0]+'</div></div><div class="bar-val">'+FM.usd(tc[i][1][1])+'</div></div>'}h+='</div></div>';
 var ab={'<$1M':0,'$1-5M':0,'$5-10M':0,'$10-50M':0,'$50M+':0};for(var i=0;i<D.length;i++){var a=D[i][4];if(a<1e6)ab['<$1M']++;else if(a<5e6)ab['$1-5M']++;else if(a<1e7)ab['$5-10M']++;else if(a<5e7)ab['$10-50M']++;else ab['$50M+']++}
 var akeys=Object.keys(ab),amx=0;for(var i=0;i<akeys.length;i++)if(ab[akeys[i]]>amx)amx=ab[akeys[i]];
